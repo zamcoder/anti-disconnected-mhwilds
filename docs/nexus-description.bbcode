@@ -1,0 +1,73 @@
+[size=5][b]Anti Disconnect - AFK Guard and Connection Log[/b][/size]
+[b]Beta.[/b] Two things that work today, and one experiment that needs your help.
+
+[size=4][b]1. AFK guard (tested)[/b][/size]
+After [b]30 minutes without input[/b] the game says [i]"Switched to Online Single Player due to inactivity"[/i]. That also takes you out of your lobby, your quest session and your [b]Link Party[/b]. The AFK guard stops that kick, so you are still with your friends when you come back.
+[list]
+[*]After 3 minutes without input, other players still see you as [b]Idle[/b], like in the normal game. Only the kick is stopped.
+[*]How: the game counts the seconds since your last input, and the guard holds that count one minute below the kick. It presses no keys, does not touch your save, and sends nothing to Capcom's servers.
+[*]Fair play: in a quest with players [b]outside your Link Party[/b] (for example an SOS), the kick still applies by default. Staying AFK in strangers' quests gets you rewards for nothing. A setting turns the guard on there too.
+[*]When it saved you, a game-style message says so: [i]"Welcome back! You had no input for 34 minutes."[/i]
+[/list]
+
+[size=4][b]2. Disconnect log (works)[/b][/size]
+When you drop, the mod writes down what the game and its network engine said, with the time. That shows whether a drop comes from your connection, from the server, or from the engine deciding your connection paused too long.
+[list]
+[*]It records:
+[list]
+[*]the game's network errors;
+[*]a closed lobby connection;
+[*]what the engine tells the quest and Link Party sessions (a member left, the session ended and why);
+[*]when your game leaves a session or the Link Party;
+[*]whether you are connected directly to the other players or through a relay.
+[/list]
+[*][b]Copy report[/b] puts it on your clipboard to send. [b]No names, no hunter IDs, no lobby IDs.[/b]
+[/list]
+
+[size=4][b]3. Steady link (experiment, off by default)[/b][/size]
+Does one player keep dropping out of the Link Party while everyone else stays, and their ping looks normal? Often they are on [b]mobile data or Wi-Fi[/b].
+[list]
+[*]The game's network engine drops a player it has not heard from for a short while. Mobile networks (shared IP addresses) can also forget a quiet game connection within seconds.
+[*]With the experiment on, your game sends its "I'm still here" signals at the engine's highest rate in quests and the Link Party. The others then hear from you more often, and the connection is never quiet.
+[*]Tested: the setting takes effect in an active quest, with no lag. [b]Whether it prevents drops is what this beta should find out.[/b]
+[/list]
+
+[size=4][b]What it cannot do[/b][/size]
+No mod can fix these:
+[list]
+[*]a connection that really stops: packet loss, weak signal, your provider;
+[*]Capcom's servers closing your connection, and maintenance;
+[*]another player's bad connection.
+[/list]
+The time limits for "connection lost" are on Capcom's servers and in Microsoft PlayFab, not in the game, so they cannot simply be raised. For those drops the log tells you what happened.
+
+[size=4][b]Please help test: report your drops[/b][/size]
+[list=1]
+[*]Play as usual with the experiment [b]off[/b] until you drop once or twice.
+[*]Play about as long with the experiment [b]on[/b].
+[*]After every drop:
+[list]
+[*]take a screenshot of the error code;
+[*]press [b]Insert → Anti Disconnect → Copy report[/b];
+[*]send it with the [url=https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml]disconnect report form[/url], or post it in the [b]Bugs[/b] tab here.
+[/list]
+[/list]
+Please mention your connection: cable, Wi-Fi, or mobile data through a hotspot or USB tethering.
+
+[size=4][b]Install[/b][/size]
+[list=1]
+[*]Install [url=https://github.com/praydog/REFramework-nightly/releases]REFramework[/url] for Monster Hunter Wilds.
+[*]Import the zip in [b]Fluffy Mod Manager[/b], or copy its [b]reframework[/b] folder into the game folder.
+[*]In the game press [b]Insert[/b] and open [b]Anti Disconnect[/b]. English and Bahasa Indonesia are built in.
+[/list]
+
+[size=4][b]FAQ[/b][/size]
+[b]Can I get banned?[/b] There are no reports of bans for REFramework scripts in Wilds. This mod changes nothing on Capcom's servers. It only changes a timer in your own game and, with the experiment on, how often your game says "still here". Use it at your own risk, like any mod.
+[b]Does it work with Better Network Errors?[/b] Yes. The AFK warning simply never comes.
+[b]A game update broke it?[/b] Anything the mod cannot find after an update is shown as "not available" in its menu instead of breaking the game. Updates follow.
+
+[size=4][b]Links[/b][/size]
+[list]
+[*]Source code, reports and full readme: [url=https://github.com/zamcoder/anti-disconnected-mhwilds]GitHub[/url] (MIT license)
+[*]Credits: REFramework by praydog. The game text dump by dtlnor helped map the game's network messages.
+[/list]

@@ -37,8 +37,9 @@ return {
     health_1 = "lebih sering",
     health_nil = "tidak diketahui",
     report_button = "Salin laporan",
-    report_done = "Laporan disalin: tempel di chat untuk mengirimnya. Juga disimpan di "
-        .. "reframework/data/AntiDisconnect/report.txt. Isinya tanpa nama atau ID.",
+    report_done = "Laporan disalin. Tempel di laporan GitHub (github.com/zamcoder/anti-disconnected-mhwilds/issues) "
+        .. "atau di tab Bugs halaman Nexus mod ini. Juga disimpan di reframework/data/AntiDisconnect/report.txt "
+        .. "dan isinya tanpa nama atau ID.",
 
     log_title = "Catatan disconnect",
     log_empty = "Belum ada yang tercatat.",

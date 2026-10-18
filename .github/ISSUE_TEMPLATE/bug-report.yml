@@ -1,0 +1,30 @@
+name: Bug in the mod
+description: Something in Anti Disconnect does not work (an error in its menu, a crash, a wrong message).
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Mod version
+      description: Shown at the top of Insert → Anti Disconnect.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: The report from "Copy report"
+      render: text
+  - type: textarea
+    id: log
+    attributes:
+      label: Lines from re2_framework_log.txt
+      description: The file is in the game folder. Lines with [AntiDisconnect] or an error near them help most.
+      render: text

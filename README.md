@@ -1,4 +1,4 @@
-# Anti Disconnect (Monster Hunter Wilds)
+# Anti Disconnect - AFK Guard and Connection Log (Monster Hunter Wilds)
 
 A REFramework script for Monster Hunter Wilds (PC). It does three things:
 
@@ -9,13 +9,10 @@ A REFramework script for Monster Hunter Wilds (PC). It does three things:
    - With a pause like that, the engine may decide one player is gone (`PeerNorecvTimeout`) while everyone else stays.
    - Its effect is not proven yet.
 
-> Status: version 0.1.0, not released yet.
->
-> Tested in game on 2026-10-18:
-> - The AFK guard stops the kick, and the "welcome back" message shows.
-> - The steady link setting takes effect in an active quest session, with no lag.
->
-> Next: testing with a player whose mobile-data connection drops out of the Link Party.
+> **Status: 0.1.0 beta.**
+> - The AFK guard is tested in game.
+> - The steady link experiment takes effect, but whether it prevents drops is what this beta should find out.
+> - [Send a disconnect report](#help-test-it-report-a-disconnect) if you drop out of a Link Party or quest.
 
 ## What the AFK guard does, and what it does not do
 
@@ -103,11 +100,32 @@ Example:
 
 The log never stores other players' names, hunter IDs or lobby IDs.
 
+## Help test it: report a disconnect
+
+The goal of this beta is to learn why one player drops out of a Link Party or quest while everyone else stays connected, and whether the steady link experiment stops it. Most useful is an A/B test:
+
+1. Play as usual with the experiment **off** until you drop once or twice.
+2. Play about as long with the experiment **on**.
+3. After every drop:
+   - take a screenshot of the error code;
+   - press **Insert → Anti Disconnect → Copy report**;
+   - send it with the [disconnect report form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml), or post it in the Bugs tab on Nexus.
+
+The report says how you were connected and what the game and its engine said before you dropped. It holds no names or IDs.
+
+For a bug in the mod itself (an error in its menu, a crash), use the [bug form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=bug-report.yml).
+
 ## Compatibility
 
 - Checked against game build 24705561 (version 1.42) with a REFramework nightly from September 2026.
 - If a game update removes something the mod uses, the menu says so ("not available on this game version") instead of breaking.
 - Works next to other mods, including *Better Network Errors*: the AFK warning simply never comes.
+
+## Credits and license
+
+- [REFramework](https://github.com/praydog/REFramework) by praydog makes the script possible.
+- The game text dump by [dtlnor](https://github.com/dtlnor/MHWsTextDump) helped map the game's network messages.
+- MIT license (see `LICENSE`).
 
 ## For developers
 

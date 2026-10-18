@@ -27,8 +27,8 @@ $zipPath = Join-Path $dist "AntiDisconnect-$version.zip"
 if (Test-Path $zipPath) { Remove-Item -Path $zipPath -Confirm:$false }
 
 $modinfo = @(
-    'name=Anti Disconnect'
-    'nameasbundle=Anti Disconnect'
+    'name=Anti Disconnect - AFK Guard and Connection Log'
+    'nameasbundle=Anti Disconnect - AFK Guard and Connection Log'
     'category=Scripts'
     "version=$version"
     'description=Stops the 30-minute AFK kick to Online Single Player and logs disconnects. Requires REFramework.'

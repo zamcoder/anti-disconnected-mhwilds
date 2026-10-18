@@ -1,0 +1,72 @@
+name: Disconnect report
+description: You dropped out of a Link Party, quest or lobby while using Anti Disconnect.
+title: "[Disconnect] "
+labels: ["disconnect report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! Every report shows which part of the connection gives up, and whether the "steady link" experiment helps.
+
+        **Before you write:** in the game press **Insert → Anti Disconnect → Copy report**, then paste it below. The report holds no names or IDs.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where were you when you dropped?
+      multiple: true
+      options:
+        - Link Party
+        - Quest with friends
+        - Quest with strangers (SOS)
+        - Lobby / Grand Hub
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Your connection
+      options:
+        - Cable (LAN)
+        - Wi-Fi
+        - Mobile data through a phone hotspot (Wi-Fi)
+        - Mobile data through USB tethering
+        - Other / not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: steady
+    attributes:
+      label: The "steady link" experiment
+      options:
+        - "Off"
+        - "On"
+        - I tried both (please say below which dropped more)
+    validations:
+      required: true
+  - type: dropdown
+    id: often
+    attributes:
+      label: How often do you drop?
+      options:
+        - Almost every session
+        - Sometimes
+        - Rarely
+  - type: input
+    id: code
+    attributes:
+      label: Error code shown in the game (if any)
+      placeholder: "for example EW_34bc5 or S9052-TAD-W79J"
+  - type: textarea
+    id: report
+    attributes:
+      label: The report from "Copy report"
+      description: Paste the whole text. It is also in reframework/data/AntiDisconnect/report.txt.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Did the others stay connected? Were you the host? Did your ping look normal? Your country helps too (Capcom's servers differ by region).

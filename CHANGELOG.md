@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.1.0 (not released yet)
+## 0.1.0 beta (2026-10-18)
+
+First release, for testing with many players.
 
 - AFK guard: stops the game's 30-minute kick to Online Single Player while you are online with others. The game's idle counter is held one minute below the kick limit; the 3-minute Idle status still works.
 - In quests with players outside your Link Party the kick still applies, unless "Also during quests with players outside my Link Party" is on.

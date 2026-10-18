@@ -43,8 +43,9 @@ local EN = {
     health_1 = "more often",
     health_nil = "unknown",
     report_button = "Copy report",
-    report_done = "Report copied: paste it in a chat to send it. It is also saved in "
-        .. "reframework/data/AntiDisconnect/report.txt. It holds no names or IDs.",
+    report_done = "Report copied. Paste it in a report on GitHub (github.com/zamcoder/anti-disconnected-mhwilds/issues) "
+        .. "or in the Bugs tab of the mod's Nexus page. It is also saved in reframework/data/AntiDisconnect/report.txt "
+        .. "and holds no names or IDs.",
 
     -- Disconnect log
     log_title = "Disconnect log",
