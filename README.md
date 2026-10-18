@@ -9,7 +9,13 @@ A REFramework script for Monster Hunter Wilds (PC). It does three things:
    - With a pause like that, the engine may decide one player is gone (`PeerNorecvTimeout`) while everyone else stays.
    - Its effect is not proven yet.
 
-> Status: version 0.1.0, not released yet. It is waiting for its first in-game test.
+> Status: version 0.1.0, not released yet.
+>
+> Tested in game on 2026-10-18:
+> - The AFK guard stops the kick, and the "welcome back" message shows.
+> - The steady link setting takes effect in an active quest session, with no lag.
+>
+> Next: testing with a player whose mobile-data connection drops out of the Link Party.
 
 ## What the AFK guard does, and what it does not do
 
