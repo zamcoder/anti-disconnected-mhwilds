@@ -9,7 +9,7 @@ Mod ini **tidak** mengirim apa pun ke server Capcom dan **tidak** mengubah save.
 1. Pasang **REFramework** untuk Monster Hunter Wilds. Kalau kamu sudah pakai mod lain yang butuh REFramework, lewati langkah ini.
    - Unduh `MHWILDS.zip` dari https://github.com/praydog/REFramework-nightly/releases
    - Salin `dinput8.dll` dari zip itu ke folder game (di sebelah `MonsterHunterWilds.exe`).
-2. Pasang mod **Anti Disconnect** dengan salah satu cara:
+2. Unduh zip **Anti Disconnect** dari https://www.nexusmods.com/monsterhunterwilds/mods/5161 (tab Files), lalu pasang dengan salah satu cara:
    - Impor zip-nya di Fluffy Mod Manager.
    - Atau salin folder `reframework` dari zip ke folder game.
 3. Buka game, tekan **Insert**, lalu buka bagian **Anti Disconnect**. Pilih **Language / Bahasa → Bahasa Indonesia**.

@@ -1,5 +1,7 @@
 # Anti Disconnect - AFK Guard and Connection Log (Monster Hunter Wilds)
 
+**Download:** [Nexus Mods](https://www.nexusmods.com/monsterhunterwilds/mods/5161)
+
 A REFramework script for Monster Hunter Wilds (PC). It does four things:
 
 1. **AFK guard.** After 30 minutes without input, the game moves you to Online Single Player with the message *"Switched to Online Single Player due to inactivity"*. That also takes you out of your lobby, your quest session and your **Link Party**. The AFK guard stops that kick, so you are still with your friends when you come back.
@@ -64,7 +66,7 @@ The tips are:
 ## Install
 
 1. Install [REFramework](https://github.com/praydog/REFramework-nightly/releases) for Monster Hunter Wilds.
-2. Install the mod in one of these ways:
+2. Download the zip from the [Nexus Mods page](https://www.nexusmods.com/monsterhunterwilds/mods/5161?tab=files) and install it in one of these ways:
    - Import the zip in Fluffy Mod Manager.
    - Or copy its `reframework` folder into the game folder (next to `MonsterHunterWilds.exe`).
 3. Start the game.
@@ -114,7 +116,7 @@ The goal of this beta is to learn why one player drops out of a Link Party or qu
 3. After every drop:
    - take a screenshot of the error code;
    - press **Insert → Anti Disconnect → Copy report**;
-   - send it with the [disconnect report form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml), or post it in the Bugs tab on Nexus.
+   - send it with the [disconnect report form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml), or post it in the [Bugs tab on Nexus](https://www.nexusmods.com/monsterhunterwilds/mods/5161?tab=bugs).
 
 The report says how you were connected and what the game and its engine said before you dropped. It holds no names or IDs.
 
