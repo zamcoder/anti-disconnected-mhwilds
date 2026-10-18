@@ -35,7 +35,7 @@ Login di https://www.nexusmods.com, buka halaman game **Monster Hunter Wilds**, 
 | Summary | `Stops the 30-minute AFK kick that also drops you out of your Link Party, logs why you disconnect, and tests a fix for players who keep dropping on mobile data or Wi-Fi. Beta: your disconnect reports help.` |
 | Description | Tempel isi `docs/nexus-description.bbcode` |
 | Category | **Utilities**. Kalau tidak ada, pilih yang paling dekat. |
-| Version | `0.1.0` (sama dengan `VERSION`) |
+| Version | `0.1.1` (sama dengan `VERSION`) |
 | Language | English |
 | Author | `evilryosaki` |
 | Tags | Multiplayer, Online, Network, Quality of Life, REFramework, Utility |
@@ -46,9 +46,9 @@ Login di https://www.nexusmods.com, buka halaman game **Monster Hunter Wilds**, 
 
 | Kolom | Isi |
 |---|---|
-| File | `dist\AntiDisconnect-0.1.0.zip` |
+| File | `dist\AntiDisconnect-0.1.1.zip` |
 | File name | `Anti Disconnect` |
-| Version | `0.1.0` |
+| Version | `0.1.1` |
 | Category | **Main Files** |
 | Description | `Beta. Fluffy Mod Manager ready. Requires REFramework.` |
 
@@ -71,7 +71,7 @@ Login di https://www.nexusmods.com, buka halaman game **Monster Hunter Wilds**, 
 2. Di Nexus, ubah **Version** di Mod details. Waktu Bulk Sell, langkah ini sempat terlewat, dan akibatnya pengecekan update jadi salah.
 3. Di **Manage → Files**, upload zip baru sebagai **Main Files**, lalu pindahkan file lama ke **Old versions**.
 4. Isi Changelog di Nexus dengan menyalin dari `CHANGELOG.md`.
-5. Commit, beri tag versi, lalu push: `git tag v0.1.1` diikuti `git push origin main --tags`.
+5. Commit, beri tag versi, lalu push: `git tag v0.1.2` diikuti `git push origin main --tags`.
 
 ## 6. Checklist sebelum publish
 

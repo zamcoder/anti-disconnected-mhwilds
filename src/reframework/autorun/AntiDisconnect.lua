@@ -26,7 +26,7 @@ local ui = require("AntiDisconnect.ui")
 
 local T = lang.T
 
-local VERSION = "0.1.0"
+local VERSION = "0.1.1"
 local TICK_SECONDS = 0.5
 local REPORT_PATH = "AntiDisconnect/report.txt"
 local REPORT_ENTRIES = 80
@@ -43,6 +43,7 @@ local state = {
     reading = nil,            -- what the last tick read from the game, for the UI
     link = link.new(),        -- steady link: what was seen and changed per session
     links = {},               -- { lobby, quest, link } = game.link_info of the last tick, for the UI
+    contexts = { changes = 0 }, -- the platform contexts and DisconnectionDetectionTime: first, now, changes
     report_requested = false, -- "Copy report" was pressed; made at the next tick
     report_done = false,
     clipboard = nil,          -- text the UI puts on the clipboard in its next frame
@@ -96,6 +97,16 @@ local function tick(now)
     for _, set in ipairs(changes.sets) do game.set_health_check(set[1], set[2]) end
     for _, event in ipairs(changes.events) do netlog.add(state.log, event) end
     state.links = infos
+
+    -- Read-only for now: does DisconnectionDetectionTime stay put (a setting) or move (a time)?
+    local ctx = game.context_info()
+    local seen = state.contexts
+    if ctx.detect ~= nil then
+        if seen.first == nil then seen.first = ctx.detect end
+        if seen.now ~= nil and seen.now ~= ctx.detect then seen.changes = seen.changes + 1 end
+        seen.now = ctx.detect
+    end
+    seen.main, seen.rebe = ctx.main, ctx.rebe
 end
 
 local function info_line(name, info)
@@ -118,6 +129,9 @@ local function make_report()
         info_line("lobby", state.links.lobby),
         info_line("quest", state.links.quest),
         info_line("link", state.links.link),
+        string.format("Contexts: main %s, rebe %s, DisconnectionDetectionTime first %s now %s, changed %d times",
+            tostring(state.contexts.main), tostring(state.contexts.rebe), tostring(state.contexts.first),
+            tostring(state.contexts.now), state.contexts.changes),
         "Log hooks on: " .. tostring(state.hooks and #state.hooks.on or 0)
             .. ((state.hooks and #state.hooks.missing > 0) and (", missing: " .. table.concat(state.hooks.missing, ", ")) or ""),
     }

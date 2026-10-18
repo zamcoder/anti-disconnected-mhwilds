@@ -281,6 +281,20 @@ function game.set_health_check(name, value)
     return ok
 end
 
+-- The engine's platform contexts behind the connection: cContextManager._Context (the
+-- platform, via.network.ContextSteam on Steam) and _RebeContext. A Context error
+-- "LinkStateInactive" sends the game to Offline Mode and out of every session at once
+-- (seen in a player's report on 2026-10-18). ContextSteam has a settable
+-- DisconnectionDetectionTime whose meaning and unit are not known yet, so it is only read:
+-- { main, rebe, detect } (class names, and the value or nil).
+function game.context_info()
+    local context = field(game.network_manager(), "_ContextManager")
+    local main = field(context, "_Context")
+    local info = { main = type_name(main), rebe = type_name(field(context, "_RebeContext")) }
+    if info.main == "via.network.ContextSteam" then info.detect = number(call(main, "get_DisconnectionDetectionTime")) end
+    return info
+end
+
 -- The connection to Capcom's servers: { state, login, local_network }; each value is nil when
 -- it cannot be read.
 function game.context()

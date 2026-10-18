@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 beta (2026-10-18)
+
+- The first real drop report showed a different kind of drop:
+  - the game's platform connection (Steam) reported `Context / LinkStateInactive` (on-screen code `C1081-AAA-AAA2`);
+  - the game went to Offline Mode at once and left the lobby, quest and Link Party;
+  - the connections to the other players were fine and direct.
+- The menu and the report now show the platform connections and the Steam context's `DisconnectionDetectionTime`. This is read only, to learn what it is before an experiment changes it.
+- The report form asks for the lines of Steam's `logs\connection_log.txt` around the drop.
+
 ## 0.1.0 beta (2026-10-18)
 
 First release, for testing with many players.

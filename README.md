@@ -113,6 +113,12 @@ The goal of this beta is to learn why one player drops out of a Link Party or qu
 
 The report says how you were connected and what the game and its engine said before you dropped. It holds no names or IDs.
 
+**On Steam, please add Steam's own log.** Open `C:\Program Files (x86)\Steam\logs\connection_log.txt` and copy the lines from the minute you dropped. The first real report showed this kind of drop:
+- the game's platform connection reported `Context / LinkStateInactive` (code `C1081-AAA-AAA2`);
+- the game went to Offline Mode at once, although the connections to the other players were fine.
+
+Steam's log shows whether Steam lost its connection at that moment.
+
 For a bug in the mod itself (an error in its menu, a crash), use the [bug form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=bug-report.yml).
 
 ## Compatibility

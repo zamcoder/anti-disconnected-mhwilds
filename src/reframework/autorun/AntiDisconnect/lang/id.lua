@@ -33,6 +33,7 @@ return {
     steady_help = "Untuk koneksi tidak stabil seperti paket data: pemain lain lebih sering menerima kabar darimu, jadi "
         .. "jeda singkat lebih jarang membuatmu terputus. Memakai sedikit lebih banyak kuota. Matikan kalau ada yang terasa aneh.",
     link_line = "%s: %s · koneksi langsung %d dari %d · sinyal \"masih di sini\": %s",
+    context_line = "Koneksi platform: %s · DisconnectionDetectionTime %s (berubah %d kali)",
     health_0 = "normal",
     health_1 = "lebih sering",
     health_nil = "tidak diketahui",

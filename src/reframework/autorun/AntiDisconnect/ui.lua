@@ -113,6 +113,10 @@ local function draw_steady(state)
                 T("health_" .. tostring(info.health))))
         end
     end
+    local ctx = state.contexts
+    if ctx and ctx.main then
+        imgui.text(T("context_line", tostring(ctx.main), tostring(ctx.now), ctx.changes or 0))
+    end
 end
 
 local function draw_log(state, actions)

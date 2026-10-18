@@ -66,6 +66,13 @@ body:
     validations:
       required: true
   - type: textarea
+    id: steam
+    attributes:
+      label: Steam's connection log around the drop (Steam players)
+      description: |
+        Open `C:\Program Files (x86)\Steam\logs\connection_log.txt` in Notepad, search for the date and minute of the drop (for example `2026-10-18 13:59`), and paste those lines. They show whether Steam itself lost its connection at that moment (`ConnectionDisconnected`, `SteamServersDisconnected_t`).
+      render: text
+  - type: textarea
     id: notes
     attributes:
       label: Anything else

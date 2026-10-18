@@ -39,6 +39,7 @@ local EN = {
     steady_help = "For unstable connections such as mobile data: the other players hear from you more often, so a short "
         .. "pause is less likely to drop you. Uses a little more data. Turn it off if anything feels wrong.",
     link_line = "%s: %s · direct connections %d of %d · \"still here\" signals: %s",
+    context_line = "Platform connection: %s · DisconnectionDetectionTime %s (changed %d times)",
     health_0 = "normal",
     health_1 = "more often",
     health_nil = "unknown",

@@ -24,12 +24,21 @@ When you drop, the mod writes down what the game and its network engine said, wi
 [*][b]Copy report[/b] puts it on your clipboard to send. [b]No names, no hunter IDs, no lobby IDs.[/b]
 [/list]
 
-[size=4][b]3. Steady link (experiment, off by default)[/b][/size]
-Does one player keep dropping out of the Link Party while everyone else stays, and their ping looks normal? Often they are on [b]mobile data or Wi-Fi[/b].
+[size=4][b]3. Why one player drops while everyone else stays[/b][/size]
+Does one player keep dropping out of the Link Party while the others stay, and their ping looks normal? Often they are on [b]mobile data or Wi-Fi[/b]. Two kinds of drop are known so far:
 [list]
-[*]The game's network engine drops a player it has not heard from for a short while. Mobile networks (shared IP addresses) can also forget a quiet game connection within seconds.
-[*]With the experiment on, your game sends its "I'm still here" signals at the engine's highest rate in quests and the Link Party. The others then hear from you more often, and the connection is never quiet.
-[*]Tested: the setting takes effect in an active quest, with no lag. [b]Whether it prevents drops is what this beta should find out.[/b]
+[*][b]The game goes to Offline Mode at once.[/b]
+[list]
+[*]The error looks like [b]C1081-AAA-AAA2[/b], and the log shows [i]Context / LinkStateInactive[/i].
+[*]The game's platform connection (Steam) lost its link for a moment, and the game gave up on every session. The connections to the other players were fine.
+[*][b]This is what the first real report showed.[/b] A fix is being worked on. Reports with the lines from Steam's [i]logs\connection_log.txt[/i] help most.
+[/list]
+[*][b]The engine drops one quiet player[/b] ([i]PeerNorecvTimeout[/i] in the log).
+[list]
+[*]The engine drops a player it has not heard from for a short while.
+[*]For this kind there is the [b]steady link[/b] experiment (off by default). Your game then sends its "I'm still here" signals at the engine's highest rate in quests and the Link Party.
+[*]Tested: it takes effect in an active quest, with no lag. Whether it prevents drops is what this beta should find out.
+[/list]
 [/list]
 
 [size=4][b]What it cannot do[/b][/size]
@@ -52,7 +61,7 @@ The time limits for "connection lost" are on Capcom's servers and in Microsoft P
 [*]send it with the [url=https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml]disconnect report form[/url], or post it in the [b]Bugs[/b] tab here.
 [/list]
 [/list]
-Please mention your connection: cable, Wi-Fi, or mobile data through a hotspot or USB tethering.
+Please mention your connection: cable, Wi-Fi, or mobile data through a hotspot or USB tethering. On Steam, also add the lines from [i]C:\Program Files (x86)\Steam\logs\connection_log.txt[/i] at the minute you dropped.
 
 [size=4][b]Install[/b][/size]
 [list=1]

@@ -28,6 +28,7 @@ Tahap A menunjukkan **penyebab** DC-nya. Tahap B menguji apakah eksperimennya me
 1. **Screenshot** pesan error dan kodenya (tombol F12 di Steam).
 2. Tekan **Insert** → **Anti Disconnect** → **Salin laporan**.
 3. **Tempel** (Ctrl+V) di chat ke yang memberimu mod ini, lalu kirim bersama screenshot-nya.
+4. Buka `C:\Program Files (x86)\Steam\logs\connection_log.txt` dengan Notepad, lalu cari (Ctrl+F) **tanggal dan menit** saat DC, misalnya `2026-10-18 13:59`. Salin baris-baris di sekitarnya dan kirim juga. Dari situ terlihat apakah Steam sendiri yang putus sesaat.
 
 Laporannya juga tersimpan di `reframework/data/AntiDisconnect/report.txt` di folder game.
 

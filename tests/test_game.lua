@@ -107,6 +107,16 @@ test("connection context", function()
     world.local_network = false
 end)
 
+test("platform contexts and DisconnectionDetectionTime (read only)", function()
+    local info = game.context_info()
+    eq(info.main, "via.network.ContextSteam", "Steam context")
+    eq(info.rebe, "via.network.ContextRebe", "the other context")
+    eq(info.detect, 10000, "value")
+    world.context.values._Context = nil
+    eq(game.context_info().detect, nil, "no context, no value")
+    world.context.values._Context = world.steam
+end)
+
 test("enum names", function()
     game.load_names()
     eq(game.name_of("error_code", 106003), "COMMON_AFK", "error code")
