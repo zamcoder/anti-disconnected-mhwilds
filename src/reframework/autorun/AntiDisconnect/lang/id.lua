@@ -33,10 +33,16 @@ return {
     steady_help = "Untuk koneksi tidak stabil seperti paket data: pemain lain lebih sering menerima kabar darimu, jadi "
         .. "jeda singkat lebih jarang membuatmu terputus. Memakai sedikit lebih banyak kuota. Matikan kalau ada yang terasa aneh.",
     link_line = "%s: %s · koneksi langsung %d dari %d · sinyal \"masih di sini\": %s",
-    context_line = "Koneksi platform: %s · DisconnectionDetectionTime %s (berubah %d kali)",
     health_0 = "normal",
     health_1 = "lebih sering",
     health_nil = "tidak diketahui",
+
+    steam_grace = "Eksperimen: kalau Steam putus sebentar, tunggu Steam tersambung lagi (paling lama 30 detik) sebelum Offline",
+    grace_help = "Untuk DC dengan kode C1081-AAA-AAA2 atau C1082-AAA-AAA2 (di catatan: Context / LinkStateInactive atau "
+        .. "LostAuth): Steam putus sebentar dan game langsung masuk Offline Mode. Kalau ini nyala, game menunggu Steam dulu. "
+        .. "Tidak membantu kalau internetmu mati lebih lama.",
+    grace_line = "Koneksi platform: %s · game masuk Offline setelah Steam hilang %s (nilai bawaan game: %s)",
+    seconds = "%s detik",
     report_button = "Salin laporan",
     report_done = "Laporan disalin. Tempel di laporan GitHub (github.com/zamcoder/anti-disconnected-mhwilds/issues) "
         .. "atau di tab Bugs halaman Nexus mod ini. Juga disimpan di reframework/data/AntiDisconnect/report.txt "
@@ -67,6 +73,8 @@ return {
     ev_lobby_connect = "Koneksi lobby gagal: %s",
     ev_p2p = "%s: %s, koneksi langsung %d dari %d",
     ev_health = "%s: sinyal \"masih di sini\" %s -> %s",
+    ev_grace = "Steam putus: game sekarang baru Offline setelah %s tanpa Steam (sebelumnya %s)",
+    ev_grace_failed = "Steam putus: jeda yang lebih lama tidak bertahan (dikembalikan game)",
     state_off = "tidak tersambung",
     state_solo = "online, sendirian",
     state_multi = "online bersama pemain lain",

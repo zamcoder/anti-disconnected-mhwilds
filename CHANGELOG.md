@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.2 beta (2026-10-18)
+
+- New, on by default: **wait for Steam**. It is for drops with the code `C1081-AAA-AAA2` or `C1082-AAA-AAA2` (`Context / LinkStateInactive` or `LostAuth` in the log).
+  - Tested in game by cutting only Steam's connection for 8–9 seconds. With the experiment off, the game went offline in the same second (`C1082-AAA-AAA2`). With it on, the game stayed online.
+  - Why these drops happen: the player's Steam log showed that their PC's network went away for about 6 seconds and Steam lost its connection to its servers for about a second. The game went to Offline Mode in that same second and left the lobby, quest and Link Party.
+  - The game's network engine only goes offline once Steam has been disconnected for longer than the Steam context's `DisconnectionDetectionTime` (in microseconds). The game never sets that value.
+  - With the experiment on, the value is set to 30 seconds while you are connected, so the game waits for Steam to log back on. In the player's Steam log nearly every short Steam drop was over within that time.
+  - The value from before comes back when the setting is turned off.
+- The menu shows how long the game waits for Steam, now and its own value. The report shows the setting.
+- After REFramework's "Reset scripts", turning wait for Steam off puts back the game's own value (0). Engine errors from HttpClient now show the cause name.
+
 ## 0.1.1 beta (2026-10-18)
 
 - The first real drop report showed a different kind of drop:

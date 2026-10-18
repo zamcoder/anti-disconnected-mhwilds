@@ -35,7 +35,7 @@ Login di https://www.nexusmods.com, buka halaman game **Monster Hunter Wilds**, 
 | Summary | `Stops the 30-minute AFK kick that also drops you out of your Link Party, logs why you disconnect, and tests a fix for players who keep dropping on mobile data or Wi-Fi. Beta: your disconnect reports help.` |
 | Description | Tempel isi `docs/nexus-description.bbcode` |
 | Category | **Utilities**. Kalau tidak ada, pilih yang paling dekat. |
-| Version | `0.1.1` (sama dengan `VERSION`) |
+| Version | `0.1.2` (sama dengan `VERSION`) |
 | Language | English |
 | Author | `evilryosaki` |
 | Tags | Multiplayer, Online, Network, Quality of Life, REFramework, Utility |
@@ -46,9 +46,9 @@ Login di https://www.nexusmods.com, buka halaman game **Monster Hunter Wilds**, 
 
 | Kolom | Isi |
 |---|---|
-| File | `dist\AntiDisconnect-0.1.1.zip` |
+| File | `dist\AntiDisconnect-0.1.2.zip` |
 | File name | `Anti Disconnect` |
-| Version | `0.1.1` |
+| Version | `0.1.2` |
 | Category | **Main Files** |
 | Description | `Beta. Fluffy Mod Manager ready. Requires REFramework.` |
 
@@ -62,7 +62,7 @@ Login di https://www.nexusmods.com, buka halaman game **Monster Hunter Wilds**, 
 
 1. **Beri tahu aku link halaman Nexus-nya**, supaya aku tambahkan ke README dan formulir GitHub.
 2. Tulis satu komentar yang di-*pin* (*Sticky*) di tab Posts:
-   > **Got disconnected?** Press Insert → Anti Disconnect → Copy report, then post it with the [disconnect report form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml) or in the Bugs tab. Please say if you were on cable, Wi-Fi or mobile data, and whether the steady link experiment was on.
+   > **Got disconnected?** Press Insert → Anti Disconnect → Copy report, then post it with the [disconnect report form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml) or in the Bugs tab. Please say if you were on cable, Wi-Fi or mobile data, and which experiments were on.
 3. Laporan yang masuk, baik dari GitHub maupun Nexus, tempel atau kirim link-nya ke aku. Nanti aku kelompokkan per penyebab dan jenis koneksi.
 
 ## 5. Merilis update

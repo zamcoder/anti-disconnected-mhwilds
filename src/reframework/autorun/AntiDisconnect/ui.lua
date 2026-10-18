@@ -113,9 +113,14 @@ local function draw_steady(state)
                 T("health_" .. tostring(info.health))))
         end
     end
+end
+
+local function draw_grace(state)
+    checkbox(state, "steam_grace")
+    say(T("grace_help"), GREY)
     local ctx = state.contexts
     if ctx and ctx.main then
-        imgui.text(T("context_line", tostring(ctx.main), tostring(ctx.now), ctx.changes or 0))
+        imgui.text(T("grace_line", tostring(ctx.main), netlog.duration(T, ctx.now), netlog.duration(T, ctx.first)))
     end
 end
 
@@ -154,6 +159,8 @@ local function draw_menu(state, actions)
     draw_guard(state, actions)
     imgui.separator()
     draw_steady(state)
+    imgui.separator()
+    draw_grace(state)
     imgui.separator()
     draw_log(state, actions)
 end

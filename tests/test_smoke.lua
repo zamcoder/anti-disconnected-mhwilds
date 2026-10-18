@@ -36,6 +36,7 @@ test("starts with the guard on, the log hooks on and a start entry", function()
     eq(state.settings.afk_guard, true, "guard on")
     eq(#state.hooks.on, 16, "hooks")
     eq(state.settings.steady_link, false, "the experiment is off by default")
+    eq(state.settings.steam_grace, true, "waiting for Steam is on by default")
     eq(state.log.events[1].kind, "start", "start entry")
     tick()
     eq(state.guard.status, "status_not_needed", "offline at first")
@@ -174,6 +175,32 @@ test("steady link: the health check rate goes up in the quest and Link Party, an
     tick()
 end)
 
+test("wait for Steam (on by default): the engine's wait is 30 s while the context is active, and back when turned off", function()
+    tick()
+    eq(world.steam.values.detect, 30000000, "30 s from the first ticks on")
+    local logged = false
+    for _, e in ipairs(state.log.events) do
+        if e.kind == "grace" and e.to == 30000000 then logged = true end
+    end
+    eq(logged, true, "logged once it stayed")
+    env.draw()
+    eq(env.has_text("^Platform connection: via.network.ContextSteam · the game goes offline after Steam is gone for 30 s "
+        .. "%(its own value: 0.01 s%)$"), true, "both values shown")
+    local label = "Experiment: when Steam drops for a moment, wait up to 30 seconds for it to come back before going offline"
+        .. "##AntiDisconnect_steam_grace"
+    env.draw({}, { [label] = false })
+    tick()
+    eq(world.steam.values.detect, 10000, "back to what it was")
+    eq(state.settings.steam_grace, false, "setting")
+    world.context.values._ContextState = 1
+    env.draw({}, { [label] = true })
+    tick()
+    eq(world.steam.values.detect, 10000, "a context that is still starting is left alone")
+    world.context.values._ContextState = 2
+    tick()
+    eq(world.steam.values.detect, 30000000, "set once it is active")
+end)
+
 test("a message waits while the REFramework menu is open (seen in game: the wake-up key opened it)", function()
     state.toast = { text = "Welcome back!", shown_at = os.clock(), until_at = os.clock() + 12 }
     env.drawing_ui = true
@@ -198,9 +225,10 @@ test("Copy report puts the log on the clipboard and in a file", function()
     tick()
     env.draw()
     local text = env.clipboard or ""
-    eq(text:find("Anti Disconnect 0.1.1 report", 1, true) ~= nil, true, "header")
+    eq(text:find("Anti Disconnect 0.1.2 report", 1, true) ~= nil, true, "header")
+    eq(text:find("steady link false, wait for Steam true", 1, true) ~= nil, true, "settings")
     eq(text:find("Contexts: main via.network.ContextSteam, rebe via.network.ContextRebe, "
-        .. "DisconnectionDetectionTime first 10000 now 10000, changed 0 times", 1, true) ~= nil, true, "contexts")
+        .. "DisconnectionDetectionTime first 10000 now 30000000, changed 3 times", 1, true) ~= nil, true, "contexts")
     eq(env.has_text("^Platform connection: via.network.ContextSteam"), true, "shown in the menu")
     eq(text:find("Link Party: engine notice b__179_9: Session / PeerNorecvTimeout", 1, true) ~= nil, true, text)
     eq(env.text_files["AntiDisconnect/report.txt"], text, "the same text in the file")
@@ -229,7 +257,7 @@ test("Indonesian", function()
     eq(state.settings.language, "id", "setting")
     tick()
     env.draw()
-    eq(env.has("Versi 0.1.1"), true, "translated")
+    eq(env.has("Versi 0.1.2"), true, "translated")
     env.draw({}, { ["Language / Bahasa##AntiDisconnectLanguage"] = 1 })
     eq(state.settings.language, "en", "back")
 end)

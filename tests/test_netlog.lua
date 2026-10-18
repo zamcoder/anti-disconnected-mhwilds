@@ -101,6 +101,12 @@ test("texts of every kind", function()
     eq(d({ kind = "party_leave", via = "reqLeaveLinkParty" }), "Link Party: your game leaves the party (reqLeaveLinkParty)", "party")
     eq(d({ kind = "lobby_leave", engine = { service = 13, cause = 141 } }), "Lobby connection ended: service 13 / cause 141", "lobby leave")
     eq(d({ kind = "lobby_leave" }), "Lobby connection ended (no error reported)", "a normal leave")
+    eq(d({ kind = "grace", from = 0, to = 30000000 }),
+        "Steam drop: the game now goes offline after 30 s without Steam (was 0 s)", "wait for Steam")
+    eq(d({ kind = "grace", from = 30000000, to = 10000 }),
+        "Steam drop: the game now goes offline after 0.01 s without Steam (was 30 s)", "put back")
+    eq(d({ kind = "grace" }), "Steam drop: the game now goes offline after ? without Steam (was ?)", "values unknown")
+    eq(d({ kind = "grace_failed" }), "Steam drop: the longer wait did not stay (the game set it back)", "did not stay")
     eq(d({ kind = "health_failed", session = "link" }),
         "Link Party: the faster \"still here\" signals did not stay (the game set them back)", "did not stay")
     eq(d({ kind = "p2p", session = "quest", class = "via.network.SessionPlayFab", tried = 3, ok = 1 }),

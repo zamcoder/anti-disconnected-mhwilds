@@ -1,5 +1,5 @@
 [size=5][b]Anti Disconnect - AFK Guard and Connection Log[/b][/size]
-[b]Beta.[/b] Two things that work today, and one experiment that needs your help.
+[b]Beta.[/b] Two things that work today, and two experiments that need your help.
 
 [size=4][b]1. AFK guard (tested)[/b][/size]
 After [b]30 minutes without input[/b] the game says [i]"Switched to Online Single Player due to inactivity"[/i]. That also takes you out of your lobby, your quest session and your [b]Link Party[/b]. The AFK guard stops that kick, so you are still with your friends when you come back.
@@ -29,9 +29,10 @@ Does one player keep dropping out of the Link Party while the others stay, and t
 [list]
 [*][b]The game goes to Offline Mode at once.[/b]
 [list]
-[*]The error looks like [b]C1081-AAA-AAA2[/b], and the log shows [i]Context / LinkStateInactive[/i].
+[*]The error looks like [b]C1081-AAA-AAA2[/b] or [b]C1082-AAA-AAA2[/b], and the log shows [i]Context / LinkStateInactive[/i] or [i]LostAuth[/i].
 [*]The game's platform connection (Steam) lost its link for a moment, and the game gave up on every session. The connections to the other players were fine.
-[*][b]This is what the first real report showed.[/b] A fix is being worked on. Reports with the lines from Steam's [i]logs\connection_log.txt[/i] help most.
+[*][b]This is what the first real report showed.[/b] Steam's own log showed that the PC's network went away for about 6 seconds, and Steam was gone for about a second. The game went offline in that same second.
+[*]For this kind there is [b]wait for Steam[/b] (on by default). The game then waits up to 30 seconds for Steam to log back on before it goes offline. Tested in game against a short Steam-only drop: off, the game went offline at once; on, it stayed online.
 [/list]
 [*][b]The engine drops one quiet player[/b] ([i]PeerNorecvTimeout[/i] in the log).
 [list]
@@ -52,8 +53,8 @@ The time limits for "connection lost" are on Capcom's servers and in Microsoft P
 
 [size=4][b]Please help test: report your drops[/b][/size]
 [list=1]
-[*]Play as usual with the experiment [b]off[/b] until you drop once or twice.
-[*]Play about as long with the experiment [b]on[/b].
+[*]Play as usual. [b]Wait for Steam[/b] is on by default; leave it on.
+[*]If your drops show [i]PeerNorecvTimeout[/i] in the log, also try [b]steady link[/b] for about as long as you played without it.
 [*]After every drop:
 [list]
 [*]take a screenshot of the error code;
@@ -61,7 +62,7 @@ The time limits for "connection lost" are on Capcom's servers and in Microsoft P
 [*]send it with the [url=https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=disconnect-report.yml]disconnect report form[/url], or post it in the [b]Bugs[/b] tab here.
 [/list]
 [/list]
-Please mention your connection: cable, Wi-Fi, or mobile data through a hotspot or USB tethering. On Steam, also add the lines from [i]C:\Program Files (x86)\Steam\logs\connection_log.txt[/i] at the minute you dropped.
+Please mention your connection: cable, Wi-Fi, or mobile data through a hotspot or USB tethering. On Steam, also add the lines from [i]C:\Program Files (x86)\Steam\logs\connection_log.txt[/i] at the minute you dropped. Those lines include your Steam ID ([i][U:1:...][/i]); remove it before you post.
 
 [size=4][b]Install[/b][/size]
 [list=1]

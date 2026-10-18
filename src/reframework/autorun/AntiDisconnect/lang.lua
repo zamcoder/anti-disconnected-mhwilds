@@ -39,10 +39,17 @@ local EN = {
     steady_help = "For unstable connections such as mobile data: the other players hear from you more often, so a short "
         .. "pause is less likely to drop you. Uses a little more data. Turn it off if anything feels wrong.",
     link_line = "%s: %s · direct connections %d of %d · \"still here\" signals: %s",
-    context_line = "Platform connection: %s · DisconnectionDetectionTime %s (changed %d times)",
     health_0 = "normal",
     health_1 = "more often",
     health_nil = "unknown",
+
+    -- Wait for Steam (experiment)
+    steam_grace = "Experiment: when Steam drops for a moment, wait up to 30 seconds for it to come back before going offline",
+    grace_help = "For drops with the code C1081-AAA-AAA2 or C1082-AAA-AAA2 (Context / LinkStateInactive or LostAuth in the log): "
+        .. "Steam lost its connection for a moment and the game went to Offline Mode at once. With this on, the game waits "
+        .. "for Steam first. It cannot help when your internet is gone for longer.",
+    grace_line = "Platform connection: %s · the game goes offline after Steam is gone for %s (its own value: %s)",
+    seconds = "%s s",
     report_button = "Copy report",
     report_done = "Report copied. Paste it in a report on GitHub (github.com/zamcoder/anti-disconnected-mhwilds/issues) "
         .. "or in the Bugs tab of the mod's Nexus page. It is also saved in reframework/data/AntiDisconnect/report.txt "
@@ -74,6 +81,8 @@ local EN = {
     ev_lobby_connect = "Lobby connection failed: %s",
     ev_p2p = "%s: %s, direct connections %d of %d",
     ev_health = "%s: \"still here\" signals %s -> %s",
+    ev_grace = "Steam drop: the game now goes offline after %s without Steam (was %s)",
+    ev_grace_failed = "Steam drop: the longer wait did not stay (the game set it back)",
     state_off = "not connected",
     state_solo = "online, alone",
     state_multi = "online with others",

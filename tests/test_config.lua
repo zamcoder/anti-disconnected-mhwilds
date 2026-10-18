@@ -15,6 +15,7 @@ test("defaults: the guard is on, quests with other players keep the kick", funct
     eq(s.afk_public_quests, false, "public quests")
     eq(s.afk_welcome, true, "welcome message")
     eq(s.steady_link, false, "the steady link experiment is off")
+    eq(s.steam_grace, true, "waiting for Steam is on")
     eq(s.language, "en", "language")
     eq(s.toast_seconds, 12, "toast seconds")
 end)

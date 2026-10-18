@@ -59,6 +59,7 @@ local ENUMS = {
 local CAUSE_ENUMS = {
     [1] = "via.network.error.CauseContext", [2] = "via.network.error.CauseP2p",
     [3] = "via.network.error.CauseSession", [7] = "via.network.error.CauseProtocol",
+    [9] = "via.network.error.CauseHttpClient",
     [13] = "via.network.error.CauseWebSocketClient", [15] = "via.network.error.CauseMatchmaking",
 }
 
@@ -284,15 +285,26 @@ end
 -- The engine's platform contexts behind the connection: cContextManager._Context (the
 -- platform, via.network.ContextSteam on Steam) and _RebeContext. A Context error
 -- "LinkStateInactive" sends the game to Offline Mode and out of every session at once
--- (seen in a player's report on 2026-10-18). ContextSteam has a settable
--- DisconnectionDetectionTime whose meaning and unit are not known yet, so it is only read:
+-- (seen in a player's report on 2026-10-18). ContextSteam's DisconnectionDetectionTime is
+-- how long Steam may stay disconnected before that happens, in microseconds (see grace.lua):
 -- { main, rebe, detect } (class names, and the value or nil).
-function game.context_info()
+local function platform_context()
     local context = field(game.network_manager(), "_ContextManager")
-    local main = field(context, "_Context")
+    return context, field(context, "_Context")
+end
+
+function game.context_info()
+    local context, main = platform_context()
     local info = { main = type_name(main), rebe = type_name(field(context, "_RebeContext")) }
     if info.main == "via.network.ContextSteam" then info.detect = number(call(main, "get_DisconnectionDetectionTime")) end
     return info
+end
+
+function game.set_detection_time(microseconds)
+    local _, main = platform_context()
+    if type_name(main) ~= "via.network.ContextSteam" then return false end
+    local ok = pcall(function() main:call("set_DisconnectionDetectionTime", microseconds) end)
+    return ok
 end
 
 -- The connection to Capcom's servers: { state, login, local_network }; each value is nil when

@@ -1,6 +1,6 @@
 # Anti Disconnect - AFK Guard and Connection Log (Monster Hunter Wilds)
 
-A REFramework script for Monster Hunter Wilds (PC). It does three things:
+A REFramework script for Monster Hunter Wilds (PC). It does four things:
 
 1. **AFK guard.** After 30 minutes without input, the game moves you to Online Single Player with the message *"Switched to Online Single Player due to inactivity"*. That also takes you out of your lobby, your quest session and your **Link Party**. The AFK guard stops that kick, so you are still with your friends when you come back.
 2. **Disconnect log.** Every time the game reports a network problem, the mod writes down when it happened and what the game said. Examples: a communication error, a closed lobby connection, Offline Mode, a lost session. It also notes when the game engine drops a player from the quest or Link Party, and why. Then you can tell whether drops come from your own connection or from the server. **Copy report** puts the log on the clipboard to send.
@@ -8,10 +8,14 @@ A REFramework script for Monster Hunter Wilds (PC). It does three things:
    - It is meant for connections that pause for a moment, such as mobile data.
    - With a pause like that, the engine may decide one player is gone (`PeerNorecvTimeout`) while everyone else stays.
    - Its effect is not proven yet.
+4. **Wait for Steam (on by default).** When Steam loses its connection for a moment, the game waits up to 30 seconds for it to come back instead of going to Offline Mode at once.
+   - It is meant for drops with the code `C1081-AAA-AAA2` or `C1082-AAA-AAA2`.
+   - Tested in game against a short Steam-only drop. Whether it saves real drops is not proven yet.
 
-> **Status: 0.1.0 beta.**
+> **Status: 0.1.2 beta.**
 > - The AFK guard is tested in game.
 > - The steady link experiment takes effect, but whether it prevents drops is what this beta should find out.
+> - Wait for Steam is tested in game against a short Steam-only drop: off, the game went offline at once; on, it stayed online. Whether it saves real drops is what this beta should find out.
 > - [Send a disconnect report](#help-test-it-report-a-disconnect) if you drop out of a Link Party or quest.
 
 ## What the AFK guard does, and what it does not do
@@ -74,6 +78,7 @@ The tips are:
 | Also during quests with players outside my Link Party | Off | Also stops the kick in quests with players outside your Link Party |
 | Tell me when I come back | On | Shows *"Welcome back! You had no input for 34 minutes. Anti Disconnect kept you online"* after the guard saved you |
 | Experiment: send "I'm still here" signals more often | Off | The engine's highest health check rate in quests and the Link Party; the old rate comes back when you turn it off |
+| Experiment: when Steam drops for a moment, wait up to 30 seconds | On | The game waits for Steam to log back on before it goes to Offline Mode; the game's own wait comes back when you turn it off |
 | Language / Bahasa | English | English or Bahasa Indonesia |
 
 The menu shows what the guard is doing right now. Examples:
@@ -102,10 +107,10 @@ The log never stores other players' names, hunter IDs or lobby IDs.
 
 ## Help test it: report a disconnect
 
-The goal of this beta is to learn why one player drops out of a Link Party or quest while everyone else stays connected, and whether the steady link experiment stops it. Most useful is an A/B test:
+The goal of this beta is to learn why one player drops out of a Link Party or quest while everyone else stays connected, and whether the experiments stop it.
 
-1. Play as usual with the experiment **off** until you drop once or twice.
-2. Play about as long with the experiment **on**.
+1. Play as usual. "Wait for Steam" is on by default; leave it on.
+2. If your drops show `PeerNorecvTimeout` in the log, also try "steady link" for about as long as you played without it.
 3. After every drop:
    - take a screenshot of the error code;
    - press **Insert → Anti Disconnect → Copy report**;
@@ -115,9 +120,10 @@ The report says how you were connected and what the game and its engine said bef
 
 **On Steam, please add Steam's own log.** Open `C:\Program Files (x86)\Steam\logs\connection_log.txt` and copy the lines from the minute you dropped. The first real report showed this kind of drop:
 - the game's platform connection reported `Context / LinkStateInactive` (code `C1081-AAA-AAA2`);
-- the game went to Offline Mode at once, although the connections to the other players were fine.
+- the game went to Offline Mode at once, although the connections to the other players were fine;
+- Steam's log showed that the PC's network went away for about 6 seconds, and Steam lost its connection for about a second. The game went offline in that same second.
 
-Steam's log shows whether Steam lost its connection at that moment.
+"Wait for Steam" is the experiment for this kind of drop. Steam's log lines include your Steam ID (`[U:1:...]`); remove it before you post the lines in public.
 
 For a bug in the mod itself (an error in its menu, a crash), use the [bug form](https://github.com/zamcoder/anti-disconnected-mhwilds/issues/new?template=bug-report.yml).
 

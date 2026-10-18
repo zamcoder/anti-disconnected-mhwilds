@@ -11,14 +11,18 @@
 --    it on the clipboard to send.
 -- 3. Steady link (experiment, off by default): the engine's highest health check rate in
 --    quests and the Link Party, for connections that pause for a moment (mobile data).
+-- 4. Wait for Steam (on by default): when Steam loses its connection for a
+--    moment, the game waits up to 30 seconds for it to come back instead of going to
+--    Offline Mode at once.
 --
 -- All game access runs on the game thread (UpdateBehavior), twice a second. The hooks only
 -- watch: nothing the game does is skipped or changed, except that the idle timer is held and,
--- with steady link on, the health check rate is raised.
+-- with the experiments on, the health check rate and the wait for Steam are raised.
 
 local afk = require("AntiDisconnect.afk")
 local config = require("AntiDisconnect.config")
 local game = require("AntiDisconnect.game")
+local grace = require("AntiDisconnect.grace")
 local lang = require("AntiDisconnect.lang")
 local link = require("AntiDisconnect.link")
 local netlog = require("AntiDisconnect.netlog")
@@ -26,7 +30,7 @@ local ui = require("AntiDisconnect.ui")
 
 local T = lang.T
 
-local VERSION = "0.1.1"
+local VERSION = "0.1.2"
 local TICK_SECONDS = 0.5
 local REPORT_PATH = "AntiDisconnect/report.txt"
 local REPORT_ENTRIES = 80
@@ -44,6 +48,7 @@ local state = {
     link = link.new(),        -- steady link: what was seen and changed per session
     links = {},               -- { lobby, quest, link } = game.link_info of the last tick, for the UI
     contexts = { changes = 0 }, -- the platform contexts and DisconnectionDetectionTime: first, now, changes
+    grace = grace.new(),      -- wait for Steam: the value before the change, and the last try
     report_requested = false, -- "Copy report" was pressed; made at the next tick
     report_done = false,
     clipboard = nil,          -- text the UI puts on the clipboard in its next frame
@@ -87,7 +92,8 @@ local function tick(now)
         end
     end
     state.reading = reading
-    netlog.observe(state.log, { sessions = reading.sessions, context = game.context() }, enum_name, game.lobby_kind)
+    local connection = game.context()
+    netlog.observe(state.log, { sessions = reading.sessions, context = connection }, enum_name, game.lobby_kind)
 
     local infos = { lobby = game.link_info("lobby"), quest = game.link_info("quest"), link = game.link_info("link") }
     for _, name in ipairs(link.SESSIONS) do
@@ -98,7 +104,7 @@ local function tick(now)
     for _, event in ipairs(changes.events) do netlog.add(state.log, event) end
     state.links = infos
 
-    -- Read-only for now: does DisconnectionDetectionTime stay put (a setting) or move (a time)?
+    -- DisconnectionDetectionTime: the game's own value (first), and how often it changed.
     local ctx = game.context_info()
     local seen = state.contexts
     if ctx.detect ~= nil then
@@ -107,6 +113,9 @@ local function tick(now)
         seen.now = ctx.detect
     end
     seen.main, seen.rebe = ctx.main, ctx.rebe
+    local wait = grace.step(state.grace, { detect = ctx.detect, state = connection.state }, state.settings, now)
+    if wait.set then game.set_detection_time(wait.set) end
+    for _, event in ipairs(wait.events) do netlog.add(state.log, event) end
 end
 
 local function info_line(name, info)
@@ -122,8 +131,8 @@ local function make_report()
     local sessions = state.reading and state.reading.sessions
     local header = {
         string.format("Anti Disconnect %s report, %s", VERSION, os.date("%Y-%m-%d %H:%M:%S")),
-        string.format("Settings: AFK guard %s, public quests %s, steady link %s", tostring(s.afk_guard),
-            tostring(s.afk_public_quests), tostring(s.steady_link)),
+        string.format("Settings: AFK guard %s, public quests %s, steady link %s, wait for Steam %s", tostring(s.afk_guard),
+            tostring(s.afk_public_quests), tostring(s.steady_link), tostring(s.steam_grace)),
         sessions and string.format("Sessions now: lobby %s, quest %s, link %s", sessions.lobby, sessions.quest, sessions.link)
             or "Sessions now: unknown",
         info_line("lobby", state.links.lobby),

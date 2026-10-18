@@ -107,13 +107,17 @@ test("connection context", function()
     world.local_network = false
 end)
 
-test("platform contexts and DisconnectionDetectionTime (read only)", function()
+test("platform contexts and DisconnectionDetectionTime", function()
     local info = game.context_info()
     eq(info.main, "via.network.ContextSteam", "Steam context")
     eq(info.rebe, "via.network.ContextRebe", "the other context")
     eq(info.detect, 10000, "value")
+    eq(game.set_detection_time(30000000), true, "set")
+    eq(game.context_info().detect, 30000000, "read back")
+    eq(game.set_detection_time(10000), true, "put back")
     world.context.values._Context = nil
     eq(game.context_info().detect, nil, "no context, no value")
+    eq(game.set_detection_time(30000000), false, "no context, nothing set")
     world.context.values._Context = world.steam
 end)
 

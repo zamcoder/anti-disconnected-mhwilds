@@ -15,6 +15,7 @@ local DEFAULTS = {
     afk_public_quests = false,    -- ...also in quests with players outside your Link Party
     afk_welcome = true,           -- a message when you come back after the guard kept you online
     steady_link = false,          -- experiment: the engine's highest health check rate in quests and the Link Party
+    steam_grace = true,           -- wait up to 30 s for Steam to come back before the game goes offline (tested in game)
     toast_seconds = 12,           -- how long such a message stays
 }
 
@@ -36,7 +37,7 @@ function config.validate(loaded)
     local result = copy(DEFAULTS)
     if type(loaded) ~= "table" then return result end
     if LANGUAGES[loaded.language] then result.language = loaded.language end
-    for _, key in ipairs({ "afk_guard", "afk_public_quests", "afk_welcome", "steady_link" }) do
+    for _, key in ipairs({ "afk_guard", "afk_public_quests", "afk_welcome", "steady_link", "steam_grace" }) do
         if type(loaded[key]) == "boolean" then result[key] = loaded[key] end
     end
     result.toast_seconds = integer_in(loaded.toast_seconds, 3, 60) or DEFAULTS.toast_seconds

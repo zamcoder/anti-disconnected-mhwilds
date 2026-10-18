@@ -70,6 +70,8 @@ function F.build(env, opts)
     mock.new_type("via.network.ContextBase")
     local steam = mock.new_type("via.network.ContextSteam", { parent = "via.network.ContextBase" })
     mock.add_method(steam, "get_DisconnectionDetectionTime", "System.Int64", {}, function(self) return self.values.detect end)
+    mock.add_method(steam, "set_DisconnectionDetectionTime", "System.Void", { "System.Int64" },
+        function(self, value) self.values.detect = value end)
     mock.new_type("via.network.ContextRebe", { parent = "via.network.ContextBase" })
     world.steam = mock.new_object("via.network.ContextSteam", { detect = 10000 })
     world.context = mock.new_object("app.net_context_manager.cContextManager", { _ContextState = 2, _LoginStatus = 2,

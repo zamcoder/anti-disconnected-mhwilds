@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping! Every report shows which part of the connection gives up, and whether the "steady link" experiment helps.
+        Thanks for helping! Every report shows which part of the connection gives up, and whether the experiments ("steady link", "wait for Steam") help.
 
         **Before you write:** in the game press **Insert → Anti Disconnect → Copy report**, then paste it below. The report holds no names or IDs.
   - type: dropdown
@@ -45,6 +45,14 @@ body:
     validations:
       required: true
   - type: dropdown
+    id: grace
+    attributes:
+      label: The "wait for Steam" experiment
+      options:
+        - "Off"
+        - "On"
+        - I tried both (please say below which dropped more)
+  - type: dropdown
     id: often
     attributes:
       label: How often do you drop?
@@ -70,7 +78,7 @@ body:
     attributes:
       label: Steam's connection log around the drop (Steam players)
       description: |
-        Open `C:\Program Files (x86)\Steam\logs\connection_log.txt` in Notepad, search for the date and minute of the drop (for example `2026-10-18 13:59`), and paste those lines. They show whether Steam itself lost its connection at that moment (`ConnectionDisconnected`, `SteamServersDisconnected_t`).
+        Open `C:\Program Files (x86)\Steam\logs\connection_log.txt` in Notepad, search for the date and minute of the drop (for example `2026-10-18 13:59`), and paste those lines. They show whether Steam itself lost its connection at that moment (`ConnectionDisconnected`, `SteamServersDisconnected_t`). The lines include your Steam ID (`[U:1:...]`); you can replace it with `[U:1:x]` before you post.
       render: text
   - type: textarea
     id: notes

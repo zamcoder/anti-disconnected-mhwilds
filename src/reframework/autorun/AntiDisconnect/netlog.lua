@@ -56,6 +56,12 @@ local function session_label(tr, session)
     return label
 end
 
+-- 30000000 microseconds -> "30 s" ("?" when unknown).
+function netlog.duration(tr, microseconds)
+    if type(microseconds) ~= "number" then return "?" end
+    return tr("seconds", string.format("%g", microseconds / 1000000))
+end
+
 -- One line for an entry. `tr` is lang.T (the chosen language) or lang.english (the log).
 function netlog.describe(event, tr)
     tr = tr or lang.T
@@ -87,6 +93,10 @@ function netlog.describe(event, tr)
     elseif kind == "health" then
         line = tr("ev_health", session_label(tr, event.session), tr("health_" .. tostring(math.tointeger(event.from))),
             tr("health_" .. tostring(math.tointeger(event.to))))
+    elseif kind == "grace" then
+        line = tr("ev_grace", netlog.duration(tr, event.to), netlog.duration(tr, event.from))
+    elseif kind == "grace_failed" then
+        line = tr("ev_grace_failed")
     elseif kind == "context" then
         line = tr("ev_context", tostring(event.from), tostring(event.to))
     elseif kind == "local_network" then
